@@ -1,6 +1,8 @@
+concepts\implementation\lambdas\LambdaOperations$MyClass.class
 concepts\implementation\streams\JavaStreamsAdvancedOperations.class
 concepts\implementation\scheduler\MyTimerTask.class
 concepts\implementation\threads\FibonacciRunnableTask.class
+concepts\implementation\streams\Company.class
 concepts\implementation\streams\JavaStreamsBasicOperations$1.class
 concepts\implementation\streams\JavaStreamsBasicOperations$2.class
 concepts\implementation\scheduler\ExecutorTask.class
@@ -9,6 +11,9 @@ concepts\implementation\streams\Employee.class
 concepts\implementation\scheduler\ScheduledThreadPoolExample.class
 concepts\implementation\threads\AtomicIntegerClass.class
 concepts\implementation\threads\AtomicIntegerClass$Counter.class
+concepts\implementation\lambdas\LambdaOperations.class
 concepts\implementation\threads\ThreadManager.class
 concepts\implementation\threads\FibonacciCallableTask.class
 concepts\implementation\streams\JavaStreamsBasicOperations.class
+concepts\implementation\lambdas\LambdaOperations$OperationsInterface.class
+concepts\implementation\lambdas\LambdaOperations$GreetingInterface.class

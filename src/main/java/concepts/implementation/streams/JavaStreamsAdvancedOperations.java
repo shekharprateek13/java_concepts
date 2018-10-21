@@ -1,36 +1,25 @@
 package concepts.implementation.streams;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author akhaurishekhar
  */
 public class JavaStreamsAdvancedOperations {
 
-	public static void main(String[] args) {
-		List<Employee> employeeList = Arrays.asList(
-				new Employee("Tom Jones Mitchell Bright", 45), 
-				new Employee("Harry Major", 25),
-				new Employee("Ethan Hardy", 65),
-				new Employee("Nancy Smith", 18),
-				new Employee("Deborah Sprightly", 25),
-				new Employee("Max", 18),
-				new Employee("Peter", 23),
-				new Employee("Pamela", 23),
-				new Employee("David", 18)
-				);
-
+	public static void collectOperations(List<Employee> employeeList){
 		/*
 		 * Returns a Collector that accumulates the input elements into a new List. There are no guarantees on the type, mutability,
 		 * serializability, or thread-safety of the List returned; if more control over the returned List is required, use 
 		 * toCollection(Supplier).... 
 		 */
-		List<Employee> filteredListUsingCollect = employeeList.stream()
-				.filter(e -> e.getName().startsWith("D")).collect(Collectors.toList());
+		List<Employee> filteredListUsingCollect = employeeList.stream().filter(e -> e.getName().startsWith("D")).collect(Collectors.toList());
 		System.out.println(filteredListUsingCollect.getClass());
 		System.out.println(filteredListUsingCollect);
 
@@ -38,8 +27,7 @@ public class JavaStreamsAdvancedOperations {
 		 * Returns a Collector that accumulates the input elements into a new Set. There are no guarantees on the type, mutability, 
 		 * serializability, or thread-safety of the Set returned; if more control over the returned Set is required, use toCollection(Supplier).
 		 */
-		Set<Employee> filteredSetUsingCollect = employeeList.stream()
-				.filter(e -> e.getName().startsWith("D")).collect(Collectors.toSet());
+		Set<Employee> filteredSetUsingCollect = employeeList.stream().filter(e -> e.getName().startsWith("D")).collect(Collectors.toSet());
 		System.out.println(filteredSetUsingCollect.getClass());
 		System.out.println(filteredSetUsingCollect);
 
@@ -65,6 +53,39 @@ public class JavaStreamsAdvancedOperations {
 		//Using Collectors toMap function....
 		Map<Integer, String> map = employeeList.stream().collect(Collectors.toMap(Employee::getAge,Employee::getName,(name1,name2) -> name1 + "|" + name2));
 		System.out.println(map);
+	}
+
+	public static void flatMapOperations(){
+		
+		List<Company> companyList = new ArrayList<Company>();
+		IntStream.range(1,4).forEach(index -> companyList.add(new Company("Company"+index,new ArrayList<Employee>())));
+		companyList.forEach(c -> 
+							IntStream.range(1, 4)
+								.forEach(index -> 
+										  c.getEmployeesList().add(new Employee("Employee_"+index,index*10))
+								)
+							);
+		System.out.println(companyList);
+		companyList.stream()
+					.flatMap(c -> c.getEmployeesList().stream())
+						.forEach(e -> System.out.println(e.getName()));
+	}
+
+	public static void main(String[] args) {
+		List<Employee> employeeList = Arrays.asList(
+				new Employee("Tom Jones Mitchell Bright", 45), 
+				new Employee("Harry Major", 25),
+				new Employee("Ethan Hardy", 65),
+				new Employee("Nancy Smith", 18),
+				new Employee("Deborah Sprightly", 25),
+				new Employee("Max", 18),
+				new Employee("Peter", 23),
+				new Employee("Pamela", 23),
+				new Employee("David", 18)
+				);
+		
+//	collectOperations(employeeList);
+	flatMapOperations();
 
 	}
 }
